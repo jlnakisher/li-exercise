@@ -15,11 +15,23 @@ jobs:
     - name: checkout
       uses: actions/checkout@v4
 
+    - name: docker log in
+      uses: docker/login-action@v4
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
     - name: build docker
       run: docker build -t golang-app .
 
+    - name: tag image
+      run: docker tag golang_app:latest ${{ secrets.DOCKER_USERNAME }}/golang_app:${{github.run_number}}
+
+    - name: push to docker hub
+      run: docker push ${{ secrets.DOCKER_USERNAME }}/golang_app:${{github.run_number}}
+
     - name: run container
-      run: docker run --name golang-test -d -p 80:8000 golang-app
+      run: docker run --name golang_test -d -p 80:8000 golang-app
 
     - name: run tests
       uses: liatrio/github-actions/apprentice-action@master
