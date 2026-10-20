@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: build docker
-      run: docker build -t golang -app .
+      run: docker build -t golang-app .
 
     - name: run container
       run: docker run --name golang-test -p 80:8000 golang-app
