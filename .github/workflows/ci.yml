@@ -1,3 +1,13 @@
+name: Check API
+
+on:
+  push:
+    branches:
+      - main
+  pull request::
+    branches:
+      - main
+
 jobs:
   build:
     runs-on: ubuntu-latest
