@@ -31,7 +31,7 @@ jobs:
       run: docker push ${{ secrets.DOCKER_USERNAME }}/golang_app:${{github.run_number}}
 
     - name: run container
-      run: docker run --name golang_test -d -p 80:8000 golang-app
+      run: docker run --name golang_test -d -p 80:8000 golang_app
 
     - name: run tests
       uses: liatrio/github-actions/apprentice-action@master
